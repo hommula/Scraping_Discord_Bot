@@ -64,10 +64,11 @@ if __name__ == "__main__":
                 print("There's no new auction.")
             else:
                 for new_auction in new:
+                    temp_img_path = "/tmp/auction_image.jpg"
                     img_data = requests.get(new_auction["image"]).content
-                    with open("auction_image.jpg", "wb") as image:
+                    with open(temp_img_path, "wb") as image:
                         image.write(img_data)
-                    with open("auction_image.jpg", "rb") as f:
+                    with open(temp_img_path, "rb") as f:
                         picture = discord.File(f)
                         await channel.send(file = picture)
                     msg = f"{new_auction['title']} \n {new_auction['url']} \n {'https://buyee.jp/item/jdirectitems/auction/' + new_auction['id']}"
